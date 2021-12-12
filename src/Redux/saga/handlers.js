@@ -25,16 +25,22 @@ export function* loginHandler(action){
 }
 
 
+
 export function* managerHandler(action){
   console.log('Called here')   
   if (action.type==="Update")
   {
-    console.log("EmployeeId")
-    console.log(action)
     try{
-      let  result = yield call(axios.post,"http://localhost:8000/users/updateStatus",{employee_id:action.data.employee_id,requestmessage:action.data.message})
-      console.log(result)
-
+      let  result = yield call(axios.post,"http://localhost:8000/users/updateLockStatus",{employee_id:action.data.employee_id,requestmessage:action.data.message})
+      result = yield call(axios.post,"http://localhost:8000/users/employeedata",{manager:localStorage.getItem('username')})
+      if (result!=='No Data Found')
+      {
+        yield put({type:"LOAD_EMPLOYEE",data: result.data})
+      }
+      else{
+        yield put({type:"FAILURE"})
+      }
+  
         } 
       catch(e){
           yield put({type:"FAILURE"})
@@ -43,11 +49,15 @@ export function* managerHandler(action){
   if (action.type==="Action")
   {
   try{
-    console.log(localStorage.getItem('usertype'))
-    let  result = yield call(axios.get,"http://localhost:8000/users/manager",{manager:localStorage.getItem('username')})
-    console.log(result.data)
-    
-    yield put({type:"LOAD_EMPLOYEE",data: result.data})
+
+    let  result = yield call(axios.post,"http://localhost:8000/users/employeedata",{manager:localStorage.getItem('username')})
+      if (result!=='No Data Found')
+      {
+        yield put({type:"LOAD_EMPLOYEE",data: result.data})
+      }
+      else{
+        yield put({type:"FAILURE"})
+      }
       } 
     catch(e){
         yield put({type:"FAILURE"})
@@ -57,16 +67,20 @@ export function* managerHandler(action){
 }
 
 export function* wfmManagerHandler(action){
-  console.log('Called here 60')   
+
    
   if (action.type==="Wfm_Action")
   {
   try{
-    
-    let  result = yield call(axios.get,"http://localhost:8000/users/wfm_manager")
-    console.log(result.data)
+    let  result = yield call(axios.post,"http://localhost:8000/users/employeeRequestData",{wfm_manager:localStorage.getItem('username')})
+    if (result!=='No Data Found')
+      {
     yield put({type:"LOAD_EMPLOYEEREQUEST",data: result.data})
       } 
+      else{
+        yield put({type:"FAILURE"})
+      }
+    }
     catch(e){
         yield put({type:"FAILURE"})
     }
@@ -74,12 +88,18 @@ export function* wfmManagerHandler(action){
 
   if (action.type==="UpdateEmployeeRequest")
   {
-    console.log("EmployeeId")
-    console.log(action)
+    
     try{
       let  result = yield call(axios.post,"http://localhost:8000/users/updateApprovalStatus",{employee_id:action.data.employee_id,status:action.data.status})
-      console.log(result)
-      yield put({type:"LOAD_EMPLOYEEREQUEST",data: result.data})
+      result = yield call(axios.post,"http://localhost:8000/users/employeeRequestData",{wfm_manager:localStorage.getItem('username')})
+      if (result!=='No Data Found')
+      {
+        yield put({type:"LOAD_EMPLOYEEREQUEST",data: result.data})
+      }
+      else{
+        yield put({type:"FAILURE"})
+      }
+  
         } 
       catch(e){
           yield put({type:"FAILURE"})

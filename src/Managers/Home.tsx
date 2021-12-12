@@ -23,32 +23,42 @@ type emp={
 
 
  const ManagerHome=({employeeData,getEmployee,updatelockstatus}:emp)=>{
-
-    useEffect(()=>{
-    getEmployee()
-    }  ,[]    
-    )
     
-     const [message,setmessage] =useState('')
+    useEffect(()=>{
+             getEmployee()
+    }  ,[]   
+    )
+   
     console.log(employeeData)
+     const [message,setmessage] =useState('')
+     const user=localStorage.getItem('username')
     return (
         <>
-        <h1>Managers Home</h1>
+       <div className = "px-3 py-2 bg-dark text-white">
 
-        <Logout></Logout>
-        <table className="table">
-                <thead>
-                    <tr key='2342'>
+       <div className = "d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+
+<h1 className="text-white col col-lg-9">Available Emaployee</h1>
+<div className = "d-flex flex-row-reverse col col-lg-3"><Logout></Logout><strong className="d-inline p-2 bg-dark text-white">{user}</strong></div>
+
+
+</div>
+        </div>
+        
+        <table className="table" >
+                <thead style={{background:'royalblue',color:'white'}}>
+                    <tr >
                     <th>Name</th>
                     <th>Experience</th>
                     <th>Skills</th>
                     <th>Manager</th>
-                    
+                    <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        employeeData.map((x:Employee)=>{
+                        
+                       employeeData.map((x:Employee)=>{
                         return(
                             <tr key={x.EmployeeId}>
                                 <td>{x.Name}</td>
@@ -69,10 +79,10 @@ type emp={
                                                  <div>
                                            
                                                     <div className="modal-content">            
-                                                        <div className="modal-header">
+                                                        <div className="modal-header modal-header-primary">
                                                             <h5 className="modal-title" id="exampleModalLongTitle">SOFT LOCK REQUEST CONFIRMATION</h5>   
-                                                            <button className="close" onClick={close}>
-                                                        
+                                                            <button className="close btn btn-secondary" onClick={close}>
+                                                                    &times;
                                                                 </button>                           
                                                         </div>
                                                     <div className="modal-body">
@@ -80,15 +90,15 @@ type emp={
                                                          Please confirm the lock request for <b>{x.Name}</b>
                                                          <br>
                                                          </br>
-                                                         Request Message(Message must be 10 char long)
+                                                         Request Message(Message must be 30 char long)
                                                          <br></br>
-                                                         <input value={message} name='reqmessage' onChange={(e)=>{setmessage(e.target.value)} }></input>
+                                                         <textarea className="form-control" value={message} maxLength={30} name='reqmessage' onChange={(e)=>{setmessage(e.target.value)} }></textarea>
                                                         <br></br>
                                                         <br></br> 
                                                         <div className="modal-footer">
                                                         
                                                             <button type="button" className="btn btn-secondary" onClick={()=>{close()}}>Close</button>
-                                                            <button type="button" className="btn btn-primary" onClick={()=>{updatelockstatus(x.EmployeeId,message)}}>Send Request</button>
+                                                            <button type="button" className={message.length>0?'btn btn-primary':'disable btn btn-light'} onClick={()=>{updatelockstatus(x.EmployeeId,message)}}>Send Request</button>
                                                         
                                                         </div>
                                                     </div>
@@ -100,6 +110,7 @@ type emp={
                             </tr>
                         )
                         })
+                        
                     }
                 </tbody>
         </table>
