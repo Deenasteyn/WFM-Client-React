@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Deenasteyn/react-training.git/static/css/main.c041b442.chunk.css",
+    "main.js": "/Deenasteyn/react-training.git/static/js/main.e45af13e.chunk.js",
+    "main.js.map": "/Deenasteyn/react-training.git/static/js/main.e45af13e.chunk.js.map",
+    "runtime-main.js": "/Deenasteyn/react-training.git/static/js/runtime-main.b1c4d616.js",
+    "runtime-main.js.map": "/Deenasteyn/react-training.git/static/js/runtime-main.b1c4d616.js.map",
+    "static/css/2.00c263ba.chunk.css": "/Deenasteyn/react-training.git/static/css/2.00c263ba.chunk.css",
+    "static/js/2.35562b57.chunk.js": "/Deenasteyn/react-training.git/static/js/2.35562b57.chunk.js",
+    "static/js/2.35562b57.chunk.js.map": "/Deenasteyn/react-training.git/static/js/2.35562b57.chunk.js.map",
+    "index.html": "/Deenasteyn/react-training.git/index.html",
+    "static/css/2.00c263ba.chunk.css.map": "/Deenasteyn/react-training.git/static/css/2.00c263ba.chunk.css.map",
+    "static/css/main.c041b442.chunk.css.map": "/Deenasteyn/react-training.git/static/css/main.c041b442.chunk.css.map",
+    "static/js/2.35562b57.chunk.js.LICENSE.txt": "/Deenasteyn/react-training.git/static/js/2.35562b57.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b1c4d616.js",
+    "static/css/2.00c263ba.chunk.css",
+    "static/js/2.35562b57.chunk.js",
+    "static/css/main.c041b442.chunk.css",
+    "static/js/main.e45af13e.chunk.js"
+  ]
+}
